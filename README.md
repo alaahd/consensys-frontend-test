@@ -33,12 +33,11 @@ Fork the repository into your account. Once your code is ready, send a pull-requ
 - React 15+
 - React router 4
 - SASS or LESS
+- Unit-tests for the UI and React components (Jest + Enzyme)
 - Must be responsive
 
 # Bonus
 
 - Redux or Flux
-- unit-tests for the UI and React components (Jest + Enzyme)
 - integration-test (one (or more) just in order to show that you know what is it (: )
-- dynamic-ui (web-sockets...?)
 - ... Impress us!
