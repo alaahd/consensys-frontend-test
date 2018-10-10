@@ -1,11 +1,5 @@
 # Frontend Assignment Test
 
-Front-End Tech Interview Test
-
-# Introduction
-
-The aim of the test is to develop a mini-application for managing TODO tasks,
-
 The goal of this technical test is to evaluate ability in core competence areas relevant
 to our organization.
 
@@ -14,6 +8,10 @@ These include:
 - Ability to use modern Javascript frameworks to interact with APIs.
 - Competence with creation and implementation of basic designs.
 - Aptitude with HTML and CSS to create clean, readable and performant code.
+
+# Introduction
+
+The aim of the test is to develop a mini-application for managing TODO tasks.
 
 Using your application we must be able to create, modify and delete a task.
 
