@@ -9,7 +9,7 @@ These include:
 - Competence with creation and implementation of basic designs.
 - Aptitude with HTML and CSS to create clean, readable and performant code.
 
-# Introduction
+# Overview
 
 The aim of the test is to develop a mini-application for managing TODO tasks.
 
