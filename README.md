@@ -25,19 +25,19 @@ We are also expecting from you a usable, responsive UI (Mobile Responsive Layout
 
 # Process
 
-Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it.
+Fork the repository into your account. Once your code is ready, send a pull-request to this repository and we will review it, you can also provide instructions how to run the applicaiton. 
 
 # Requirements
 
 - HTML5
 - React 15+
 - React router 4
+- Using noSQL database to write/read TODO tasks (ex: mongoDB, AeroSpike, CouchBase)
 - SASS or LESS
 - Unit-tests for the UI and React components (Jest + Enzyme)
 - Must be responsive
 
 # Bonus
-
 - Redux or Flux
 - integration-test (one (or more) just in order to show that you know what is it (: )
 - ... Impress us!
