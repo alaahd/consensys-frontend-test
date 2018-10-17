@@ -1,64 +1,45 @@
-import React from 'react';
+import React , { Component } from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import TaskList from './components/task-list.jsx';
+import NewTask from './components/new-task.jsx';
 
-class App extends React.Component {
+class App extends Component {
+ 	constructor(props) {
+	    super(props);
 
-insert(){
-	//var number = this.state.number;
+	    this.state = {
+	      tasks: []
+	    };
+ 	}
 
-	$.ajax({
-		method: 'POST',
-		url: '/api/users/',
-		data: {"userName":"xyz","role": "ADMIN"},
-		success: function (data) {
-			alert("added successfully!")
-			console.log("success",data)
-		}
-	})
-	
+ 	componentDidMount() {
+		this.getTasks();
+	}
+
+	getTasks(){
+		$.ajax({
+			method: 'GET',
+			url: '/tasks',
+			success: (tasks) => {
+				this.setState({tasks})
+			},
+			error: (data) => {
+			    console.error('Failed to get tasks', data);
+			}
+  		})
+	}
+
+
+	render() {
+    	return (
+	      	<div>
+	      		<h3>Manage your tasks and START</h3>
+	        	<NewTask getTasks={this.getTasks}/>
+	        	<TaskList tasks={this.state.tasks}/>
+	      	</div>
+	    );
+    }
 }
 
-
-put(){
-	//var number = this.state.number;
-
-	$.ajax({
-		method: 'PUT',
-		url: '/api/users/5bc0e56faf6ee13c5768038f',
-		data: {"userName":"xyz1", "role": "Normal"},
-		success: function (data) {
-			alert("added successfully!")
-			console.log("success",data)
-		}
-	})
-	
-}
-delete(){
-	//var number = this.state.number;
-
-	$.ajax({
-		method: 'DELETE',
-		url: '/api/users/5bc0e2cea69f993afac019f3',
-		success: function (data) {
-			alert("added successfully!")
-			console.log("success",data)
-		}
-	})
-	
-}
-render(){
-return (
-	<div>
-<button onClick = {this.insert.bind(this)}>ADD!</button>
-<button onClick = {this.put.bind(this)}>PUT! </button>
-<button onClick = {this.delete.bind(this)}>DELETE! </button>
-
-</div>
-)
-		
-		
-}
-}
-
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App />,document.getElementById('app'));
