@@ -1,7 +1,12 @@
 'use strict';
 
+const express = require('express');
 const app = require('express')();
 const tasksContainer = require('./tasks.json');
+const path =require('path');
+
+
+app.use(express.static(__dirname + '/client'));
 
 /**
  * GET /tasks
