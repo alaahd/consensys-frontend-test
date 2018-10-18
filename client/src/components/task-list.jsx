@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
 import TaskListEntry from './task-list-entry.jsx';
 
-const TaskList = ({tasks, deleteTask}) => {
+const TaskList = ({tasks, deleteTask, editTask}) => {
 	return (
 		<div>
 			{ tasks.map( (task) => {
@@ -9,8 +9,10 @@ const TaskList = ({tasks, deleteTask}) => {
 											<TaskListEntry 
 											    key={task.id}
 												id={task.id} 
-												task={task} 
+												title={task.title} 
+												description={task.description}
 												deleteTask={deleteTask}
+												editTask={editTask}
 											/> 
 										)
 									}

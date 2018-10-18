@@ -132,9 +132,26 @@
 				});
 			}
 		}, {
+			key: 'editTask',
+			value: function editTask(id, title, description) {
+				var _this4 = this;
+	
+				_jquery2.default.ajax({
+					method: 'PUT',
+					url: '/task/update/' + id + '/' + title + '/' + description,
+					success: function success(data) {
+						_this4.getTasks();
+						console.log('task was updated');
+					},
+					error: function error(data) {
+						console.error('Failed to update task', data);
+					}
+				});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				var _this4 = this;
+				var _this5 = this;
 	
 				return _react2.default.createElement(
 					'div',
@@ -145,16 +162,22 @@
 						'Use your time wisely'
 					),
 					_react2.default.createElement(_newTask2.default, { getTasks: function getTasks() {
-							return _this4.getTasks();
+							return _this5.getTasks();
 						} }),
 					_react2.default.createElement(
 						'h3',
 						null,
 						' Tasks '
 					),
-					_react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, deleteTask: function deleteTask(id) {
-							return _this4.deleteTask(id);
-						} })
+					_react2.default.createElement(_taskList2.default, {
+						tasks: this.state.tasks,
+						deleteTask: function deleteTask(id) {
+							return _this5.deleteTask(id);
+						},
+						editTask: function editTask(id, title, description) {
+							return _this5.editTask(id, title, description);
+						}
+					})
 				);
 			}
 		}]);
@@ -33023,7 +33046,8 @@
 	
 	var TaskList = function TaskList(_ref) {
 		var tasks = _ref.tasks,
-		    deleteTask = _ref.deleteTask;
+		    deleteTask = _ref.deleteTask,
+		    editTask = _ref.editTask;
 	
 		return _react2.default.createElement(
 			'div',
@@ -33032,8 +33056,10 @@
 				return _react2.default.createElement(_taskListEntry2.default, {
 					key: task.id,
 					id: task.id,
-					task: task,
-					deleteTask: deleteTask
+					title: task.title,
+					description: task.description,
+					deleteTask: deleteTask,
+					editTask: editTask
 				});
 			})
 		);
@@ -33051,38 +33077,124 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _jquery = __webpack_require__(/*! jquery */ 184);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var TaskListEntry = function TaskListEntry(_ref) {
-	  var id = _ref.id,
-	      task = _ref.task,
-	      deleteTask = _ref.deleteTask;
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	  return _react2.default.createElement(
-	    'div',
-	    { onClick: function onClick() {
-	        return deleteTask(id);
-	      } },
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      ' ',
-	      task.title
-	    ),
-	    _react2.default.createElement(
-	      'div',
-	      null,
-	      task.description
-	    )
-	  );
-	};
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var TaskListEntry = function (_Component) {
+		_inherits(TaskListEntry, _Component);
+	
+		function TaskListEntry(props) {
+			_classCallCheck(this, TaskListEntry);
+	
+			var _this = _possibleConstructorReturn(this, (TaskListEntry.__proto__ || Object.getPrototypeOf(TaskListEntry)).call(this, props));
+	
+			_this.state = {
+				editFlag: false,
+				titlee: "",
+				descriptionn: ""
+			};
+			return _this;
+		}
+	
+		// getTask(id){
+		// 	$.ajax({
+		// 		method: 'GET',
+		// 		url: `/task/${id}`,
+		// 		success: (task) => {
+		// 			this.setState({id:task.id,title:task.title,description:task.description})
+		// 		},
+		// 		error: (data) => {
+		// 		    console.error('Failed to get updated task', data);
+		// 		}
+		//  		})
+		// }
+	
+	
+		_createClass(TaskListEntry, [{
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+	
+				if (!this.state.editFlag) {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'button',
+							{ onClick: function onClick() {
+									return _this2.props.deleteTask(_this2.props.id);
+								} },
+							'deleteTask'
+						),
+						_react2.default.createElement(
+							'button',
+							{ onClick: function onClick() {
+									return _this2.setState({ editFlag: !_this2.state.editFlag });
+								} },
+							'editTask'
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							' ',
+							this.props.title
+						),
+						_react2.default.createElement(
+							'div',
+							null,
+							this.props.description
+						)
+					);
+				} else {
+					return _react2.default.createElement(
+						'div',
+						null,
+						_react2.default.createElement(
+							'form',
+							{ onSubmit: function onSubmit() {
+									_this2.props.editTask(_this2.props.id, _this2.state.title, _this2.state.description);
+								} },
+							_react2.default.createElement('input', {
+								type: 'text',
+								value: this.state.title,
+								onChange: function onChange(e) {
+									_this2.setState({ title: e.target.value });
+								}
+							}),
+							_react2.default.createElement('input', {
+								type: 'text',
+								value: this.state.description,
+								onChange: function onChange(e) {
+									_this2.setState({ description: e.target.value });
+								}
+							}),
+							_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+						)
+					);
+				}
+			}
+		}]);
+	
+		return TaskListEntry;
+	}(_react.Component);
 	
 	exports.default = TaskListEntry;
 

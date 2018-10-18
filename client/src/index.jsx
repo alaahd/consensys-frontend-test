@@ -44,6 +44,22 @@ class App extends Component {
   		})
 	}
 
+	editTask(id, title, description){
+		$.ajax({
+			method: 'PUT',
+			url: `/task/update/${id}/${title}/${description}`,
+			success: (data) => {
+				this.getTasks();
+				console.log('task was updated');
+			},
+			error: (data) => {
+			    console.error('Failed to update task', data);
+			}
+  		})
+	}
+
+	
+
 
 	render() {
     	return (
@@ -51,7 +67,11 @@ class App extends Component {
 		      		<h2>Use your time wisely</h2>
 		        	<NewTask getTasks={()=> this.getTasks()}/>
 		        	<h3> Tasks </h3>
-		        	<TaskList tasks={this.state.tasks} deleteTask={(id) => this.deleteTask(id)}/>
+		        	<TaskList 
+		        		tasks={this.state.tasks} 
+		        		deleteTask={(id) => this.deleteTask(id)}
+		        		editTask={(id,title,description) => this.editTask(id,title,description)}
+		        	/>
 	      	</div>
 	    );
     }
