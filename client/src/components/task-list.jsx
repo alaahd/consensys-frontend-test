@@ -7,6 +7,7 @@ const TaskList = ({tasks, deleteTask}) => {
 			{ tasks.map( (task) => {
 										return(
 											<TaskListEntry 
+											    key={task.id}
 												id={task.id} 
 												task={task} 
 												deleteTask={deleteTask}

@@ -49,7 +49,7 @@ class App extends Component {
     	return (
 	      	<div>
 		      		<h2>Use your time wisely</h2>
-		        	<NewTask getTasks={this.getTasks}/>
+		        	<NewTask getTasks={()=> this.getTasks()}/>
 		        	<h3> Tasks </h3>
 		        	<TaskList tasks={this.state.tasks} deleteTask={(id) => this.deleteTask(id)}/>
 	      	</div>

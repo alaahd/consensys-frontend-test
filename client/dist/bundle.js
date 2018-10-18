@@ -144,7 +144,9 @@
 						null,
 						'Use your time wisely'
 					),
-					_react2.default.createElement(_newTask2.default, { getTasks: this.getTasks }),
+					_react2.default.createElement(_newTask2.default, { getTasks: function getTasks() {
+							return _this4.getTasks();
+						} }),
 					_react2.default.createElement(
 						'h3',
 						null,
@@ -33028,6 +33030,7 @@
 			null,
 			tasks.map(function (task) {
 				return _react2.default.createElement(_taskListEntry2.default, {
+					key: task.id,
 					id: task.id,
 					task: task,
 					deleteTask: deleteTask
@@ -33090,7 +33093,7 @@
   \********************************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -33101,6 +33104,10 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _jquery = __webpack_require__(/*! jquery */ 184);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -33126,16 +33133,16 @@
 		}
 	
 		_createClass(NewTask, [{
-			key: "addTask",
+			key: 'addTask',
 			value: function addTask(title, description) {
 				var _this2 = this;
 	
-				$.ajax({
+				_jquery2.default.ajax({
 					method: 'POST',
-					url: "/task/create/" + title + "/" + description,
+					url: '/task/create/' + title + '/' + description,
 					success: function success(msg) {
 						_this2.props.getTasks();
-						console.log("success", data);
+						console.log("success", msg);
 					},
 					error: function error(data) {
 						console.error('Failed to get tasks', data);
@@ -33143,33 +33150,33 @@
 				});
 			}
 		}, {
-			key: "render",
+			key: 'render',
 			value: function render() {
 				var _this3 = this;
 	
 				return _react2.default.createElement(
-					"div",
+					'div',
 					null,
 					_react2.default.createElement(
-						"form",
+						'form',
 						{ onSubmit: function onSubmit() {
 								_this3.addTask(_this3.state.title, _this3.state.description);
 							} },
-						_react2.default.createElement("input", {
-							type: "text",
+						_react2.default.createElement('input', {
+							type: 'text',
 							value: this.state.title,
 							onChange: function onChange(e) {
 								_this3.setState({ title: e.target.value });
 							}
 						}),
-						_react2.default.createElement("input", {
-							type: "text",
+						_react2.default.createElement('input', {
+							type: 'text',
 							value: this.state.description,
 							onChange: function onChange(e) {
 								_this3.setState({ description: e.target.value });
 							}
 						}),
-						_react2.default.createElement("input", { type: "submit", value: "Submit" })
+						_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
 					)
 				);
 			}
