@@ -22,7 +22,21 @@ class App extends Component {
 			method: 'GET',
 			url: '/tasks',
 			success: (tasks) => {
-				this.setState({tasks})
+				this.setState({tasks:tasks.tasks})
+			},
+			error: (data) => {
+			    console.error('Failed to get tasks', data);
+			}
+  		})
+	}
+
+	deleteTask(id){
+		$.ajax({
+			method: 'DELETE',
+			url: `/task/delete/${id}`,
+			success: (data) => {
+                this.getTasks();
+				console.log('task was deleted');
 			},
 			error: (data) => {
 			    console.error('Failed to get tasks', data);
@@ -34,9 +48,10 @@ class App extends Component {
 	render() {
     	return (
 	      	<div>
-	      		<h3>Manage your tasks and START</h3>
-	        	<NewTask getTasks={this.getTasks}/>
-	        	<TaskList tasks={this.state.tasks}/>
+		      		<h2>Use your time wisely</h2>
+		        	<NewTask getTasks={this.getTasks}/>
+		        	<h3> Tasks </h3>
+		        	<TaskList tasks={this.state.tasks} deleteTask={(id) => this.deleteTask(id)}/>
 	      	</div>
 	    );
     }

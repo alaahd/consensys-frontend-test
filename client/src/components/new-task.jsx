@@ -30,9 +30,17 @@ class NewTask extends Component {
 	render() {
     	return (
 	      	<div>
-	      		<form onSubmit={() => {this.addTask(this.state.title,this.state.description)}}>
-		      		<input type="text" value={this.state.title} onChange={ e => this.setState({title:e.target.value}) } />
-		      		<input type="text" value={this.state.description} onChange={ e => this.setState({description:e.target.value}) } />
+	      		<form onSubmit={ () => {this.addTask(this.state.title,this.state.description)} }>
+		      		<input 
+		      			type="text" 
+		      			value={this.state.title} 
+		      			onChange={ (e) => {this.setState({title:e.target.value})} } 
+		      		/>
+		      		<input 
+		      			type="text" 
+		      			value={this.state.description} 
+		      			onChange={ (e)=> {this.setState({description:e.target.value})} } 
+		      		/>
 		      		<input type="submit" value="Submit" />
 		      	</form>
 	      	</div>

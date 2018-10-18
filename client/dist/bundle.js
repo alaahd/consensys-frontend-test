@@ -67,7 +67,7 @@
 	
 	var _taskList2 = _interopRequireDefault(_taskList);
 	
-	var _newTask = __webpack_require__(/*! ./components/new-task.jsx */ 186);
+	var _newTask = __webpack_require__(/*! ./components/new-task.jsx */ 187);
 	
 	var _newTask2 = _interopRequireDefault(_newTask);
 	
@@ -107,7 +107,24 @@
 					method: 'GET',
 					url: '/tasks',
 					success: function success(tasks) {
-						_this2.setState({ tasks: tasks });
+						_this2.setState({ tasks: tasks.tasks });
+					},
+					error: function error(data) {
+						console.error('Failed to get tasks', data);
+					}
+				});
+			}
+		}, {
+			key: 'deleteTask',
+			value: function deleteTask(id) {
+				var _this3 = this;
+	
+				_jquery2.default.ajax({
+					method: 'DELETE',
+					url: '/task/delete/' + id,
+					success: function success(data) {
+						_this3.getTasks();
+						console.log('task was deleted');
 					},
 					error: function error(data) {
 						console.error('Failed to get tasks', data);
@@ -117,16 +134,25 @@
 		}, {
 			key: 'render',
 			value: function render() {
+				var _this4 = this;
+	
 				return _react2.default.createElement(
 					'div',
 					null,
 					_react2.default.createElement(
-						'h3',
+						'h2',
 						null,
-						'Manage your tasks and START'
+						'Use your time wisely'
 					),
 					_react2.default.createElement(_newTask2.default, { getTasks: this.getTasks }),
-					_react2.default.createElement(_taskList2.default, { tasks: this.state.tasks })
+					_react2.default.createElement(
+						'h3',
+						null,
+						' Tasks '
+					),
+					_react2.default.createElement(_taskList2.default, { tasks: this.state.tasks, deleteTask: function deleteTask(id) {
+							return _this4.deleteTask(id);
+						} })
 				);
 			}
 		}]);
@@ -32987,13 +33013,26 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _taskListEntry = __webpack_require__(/*! ./task-list-entry.jsx */ 186);
+	
+	var _taskListEntry2 = _interopRequireDefault(_taskListEntry);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var TaskList = function TaskList(props) {
+	var TaskList = function TaskList(_ref) {
+		var tasks = _ref.tasks,
+		    deleteTask = _ref.deleteTask;
+	
 		return _react2.default.createElement(
 			'div',
 			null,
-			'hi'
+			tasks.map(function (task) {
+				return _react2.default.createElement(_taskListEntry2.default, {
+					id: task.id,
+					task: task,
+					deleteTask: deleteTask
+				});
+			})
 		);
 	};
 	
@@ -33001,6 +33040,51 @@
 
 /***/ }),
 /* 186 */
+/*!***************************************************!*\
+  !*** ./client/src/components/task-list-entry.jsx ***!
+  \***************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var TaskListEntry = function TaskListEntry(_ref) {
+	  var id = _ref.id,
+	      task = _ref.task,
+	      deleteTask = _ref.deleteTask;
+	
+	  return _react2.default.createElement(
+	    'div',
+	    { onClick: function onClick() {
+	        return deleteTask(id);
+	      } },
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      ' ',
+	      task.title
+	    ),
+	    _react2.default.createElement(
+	      'div',
+	      null,
+	      task.description
+	    )
+	  );
+	};
+	
+	exports.default = TaskListEntry;
+
+/***/ }),
+/* 187 */
 /*!********************************************!*\
   !*** ./client/src/components/new-task.jsx ***!
   \********************************************/
@@ -33071,12 +33155,20 @@
 						{ onSubmit: function onSubmit() {
 								_this3.addTask(_this3.state.title, _this3.state.description);
 							} },
-						_react2.default.createElement("input", { type: "text", value: this.state.title, onChange: function onChange(e) {
-								return _this3.setState({ title: e.target.value });
-							} }),
-						_react2.default.createElement("input", { type: "text", value: this.state.description, onChange: function onChange(e) {
-								return _this3.setState({ description: e.target.value });
-							} }),
+						_react2.default.createElement("input", {
+							type: "text",
+							value: this.state.title,
+							onChange: function onChange(e) {
+								_this3.setState({ title: e.target.value });
+							}
+						}),
+						_react2.default.createElement("input", {
+							type: "text",
+							value: this.state.description,
+							onChange: function onChange(e) {
+								_this3.setState({ description: e.target.value });
+							}
+						}),
 						_react2.default.createElement("input", { type: "submit", value: "Submit" })
 					)
 				);
