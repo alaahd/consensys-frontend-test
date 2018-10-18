@@ -1,5 +1,7 @@
 import React , { Component } from 'react';
 import $ from 'jquery';
+import {BrowserRouter as Router, Link} from 'react-router-dom';
+
 
 
 class NewTask extends Component {
@@ -20,6 +22,7 @@ class NewTask extends Component {
 			success:  (msg) => {
 				this.props.getTasks();
 				console.log("success",msg);
+				window.location.reload();
 			},
 			error:  (data) => {
 			    console.error('Failed to get tasks', data);
@@ -29,21 +32,21 @@ class NewTask extends Component {
 
 	render() {
     	return (
-	      	<div>
-	      			<form onSubmit={ () => {this.addTask(this.state.title,this.state.description)}}>
-			      		<input 
-			      			type="text" 
-			      			value={this.state.title} 
-			      			onChange={ (e) => {this.setState({title:e.target.value})} } 
-			      		/>
-			      		<input 
-			      			type="text" 
-			      			value={this.state.description} 
-			      			onChange={ (e)=> {this.setState({description:e.target.value})} } 
-			      		/>
-			      		<input type="submit" value="Submit" />
-			      	</form>
-	      	</div>
+    			<Router>
+		      		<div>
+				      	<input 
+				      		type="text" 
+				      		value={this.state.title} 
+				      		onChange={ (e) => {this.setState({title:e.target.value})} } 
+				     	/>
+				      	<input 
+				      		type="text" 
+				      		value={this.state.description} 
+				      		onChange={ (e)=> {this.setState({description:e.target.value})} } 
+				      	/>
+				      	<Link to="/" onClick={ () => {this.addTask(this.state.title,this.state.description)}}>add</Link>
+		      		</div>
+		      	</Router>
 	    );
     }
 }
