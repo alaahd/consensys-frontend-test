@@ -159,22 +159,25 @@
 						return _this5.getTasks();
 					} });
 			}
+		}, {
+			key: 'showTaskList',
+			value: function showTaskList() {
+				var _this6 = this;
 	
-			// 	showTaskList(){
-			// 	return (
-			// 		<TaskList 
-			// 			tasks={this.state.tasks} 
-			// 			deleteTask={(id) => this.deleteTask(id)}
-			// 			editTask={(id,title,description) => this.editTask(id,title,description)}
-			// 		/>
-			// 	)
-			// }
-	
-	
+				return _react2.default.createElement(_taskList2.default, {
+					tasks: this.state.tasks,
+					deleteTask: function deleteTask(id) {
+						return _this6.deleteTask(id);
+					},
+					editTask: function editTask(id, title, description) {
+						return _this6.editTask(id, title, description);
+					}
+				});
+			}
 		}, {
 			key: 'render',
 			value: function render() {
-				var _this6 = this;
+				var _this7 = this;
 	
 				return _react2.default.createElement(
 					_reactRouterDom.BrowserRouter,
@@ -182,33 +185,12 @@
 					_react2.default.createElement(
 						'div',
 						null,
-						_react2.default.createElement(
-							'h2',
-							null,
-							'Use your time wisely'
-						),
-						_react2.default.createElement(
-							_reactRouterDom.Link,
-							{ to: '/newTask' },
-							'+'
-						),
-						_react2.default.createElement(_reactRouterDom.Route, { path: '/newTask', exact: true, strict: true, render: function render() {
-								return _this6.showNewTask();
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/newTask', render: function render() {
+								return _this7.showNewTask();
 							} }),
-						_react2.default.createElement(
-							'h3',
-							null,
-							' Tasks '
-						),
-						_react2.default.createElement(_taskList2.default, {
-							tasks: this.state.tasks,
-							deleteTask: function deleteTask(id) {
-								return _this6.deleteTask(id);
-							},
-							editTask: function editTask(id, title, description) {
-								return _this6.editTask(id, title, description);
-							}
-						})
+						_react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render() {
+								return _this7.showTaskList();
+							} })
 					)
 				);
 			}
@@ -33074,6 +33056,8 @@
 	
 	var _taskListEntry2 = _interopRequireDefault(_taskListEntry);
 	
+	var _reactRouterDom = __webpack_require__(/*! react-router-dom */ 188);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var TaskList = function TaskList(_ref) {
@@ -33084,16 +33068,29 @@
 		return _react2.default.createElement(
 			'div',
 			null,
-			tasks.map(function (task) {
-				return _react2.default.createElement(_taskListEntry2.default, {
-					key: task.id,
-					id: task.id,
-					title: task.title,
-					description: task.description,
-					deleteTask: deleteTask,
-					editTask: editTask
-				});
-			})
+			_react2.default.createElement(
+				_reactRouterDom.Link,
+				{ to: '/newTask' },
+				'+'
+			),
+			_react2.default.createElement(
+				'ul',
+				null,
+				tasks.map(function (task) {
+					return _react2.default.createElement(
+						'li',
+						null,
+						_react2.default.createElement(_taskListEntry2.default, {
+							key: task.id,
+							id: task.id,
+							title: task.title,
+							description: task.description,
+							deleteTask: deleteTask,
+							editTask: editTask
+						})
+					);
+				})
+			)
 		);
 	};
 	
@@ -33146,20 +33143,6 @@
 			return _this;
 		}
 	
-		// getTask(id){
-		// 	$.ajax({
-		// 		method: 'GET',
-		// 		url: `/task/${id}`,
-		// 		success: (task) => {
-		// 			this.setState({id:task.id,title:task.title,description:task.description})
-		// 		},
-		// 		error: (data) => {
-		// 		    console.error('Failed to get updated task', data);
-		// 		}
-		//  		})
-		// }
-	
-	
 		_createClass(TaskListEntry, [{
 			key: 'render',
 			value: function render() {
@@ -33169,20 +33152,12 @@
 					return _react2.default.createElement(
 						'div',
 						null,
-						_react2.default.createElement(
-							'button',
-							{ onClick: function onClick() {
-									return _this2.props.deleteTask(_this2.props.id);
-								} },
-							'deleteTask'
-						),
-						_react2.default.createElement(
-							'button',
-							{ onClick: function onClick() {
-									return _this2.setState({ editFlag: !_this2.state.editFlag });
-								} },
-							'editTask'
-						),
+						_react2.default.createElement('button', { className: 'close', onClick: function onClick() {
+								return _this2.props.deleteTask(_this2.props.id);
+							} }),
+						_react2.default.createElement('button', { className: 'edit', onClick: function onClick() {
+								return _this2.setState({ editFlag: !_this2.state.editFlag });
+							} }),
 						_react2.default.createElement(
 							'div',
 							null,
@@ -33209,14 +33184,16 @@
 								value: this.state.title,
 								onChange: function onChange(e) {
 									_this2.setState({ title: e.target.value });
-								}
+								},
+								placeholder: 'Edit task title'
 							}),
 							_react2.default.createElement('input', {
 								type: 'text',
 								value: this.state.description,
 								onChange: function onChange(e) {
 									_this2.setState({ description: e.target.value });
-								}
+								},
+								placeholder: 'Edit task description'
 							}),
 							_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
 						)
@@ -33289,7 +33266,6 @@
 					success: function success(msg) {
 						_this2.props.getTasks();
 						console.log("success", msg);
-						window.location.reload();
 					},
 					error: function error(data) {
 						console.error('Failed to get tasks', data);
@@ -33302,30 +33278,32 @@
 				var _this3 = this;
 	
 				return _react2.default.createElement(
-					_reactRouterDom.BrowserRouter,
-					null,
+					'div',
+					{ className: 'NewTask' },
+					_react2.default.createElement('input', {
+						type: 'text',
+						value: this.state.title,
+						onChange: function onChange(e) {
+							_this3.setState({ title: e.target.value });
+						},
+						placeholder: 'Task title'
+					}),
+					_react2.default.createElement('input', {
+						type: 'text',
+						value: this.state.description,
+						onChange: function onChange(e) {
+							_this3.setState({ description: e.target.value });
+						},
+						placeholder: 'Task description'
+					}),
 					_react2.default.createElement(
-						'div',
-						null,
-						_react2.default.createElement('input', {
-							type: 'text',
-							value: this.state.title,
-							onChange: function onChange(e) {
-								_this3.setState({ title: e.target.value });
-							}
-						}),
-						_react2.default.createElement('input', {
-							type: 'text',
-							value: this.state.description,
-							onChange: function onChange(e) {
-								_this3.setState({ description: e.target.value });
-							}
-						}),
+						_reactRouterDom.Link,
+						{ to: '/', onClick: function onClick() {
+								_this3.addTask(_this3.state.title, _this3.state.description);
+							} },
 						_react2.default.createElement(
-							_reactRouterDom.Link,
-							{ to: '/', onClick: function onClick() {
-									_this3.addTask(_this3.state.title, _this3.state.description);
-								} },
+							'button',
+							{ className: 'addBtn' },
 							'add'
 						)
 					)

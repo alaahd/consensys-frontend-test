@@ -61,34 +61,27 @@ class App extends Component {
 	}
 
 	showNewTask(){
-		return <NewTask getTasks={()=> this.getTasks()}/>
+		return <NewTask  getTasks={()=> this.getTasks()}/>
 	}
 
- // 	showTaskList(){
-	// 	return (
-	// 		<TaskList 
-	// 			tasks={this.state.tasks} 
-	// 			deleteTask={(id) => this.deleteTask(id)}
-	// 			editTask={(id,title,description) => this.editTask(id,title,description)}
-	// 		/>
-	// 	)
-	// }
+ 	showTaskList(){
+		return (
+			<TaskList 
+				tasks={this.state.tasks} 
+				deleteTask={(id) => this.deleteTask(id)}
+				editTask={(id,title,description) => this.editTask(id,title,description)}
+			/>
+		)
+	}
 
 
 	render() {
     	return (
     			<Router>
 		      		<div>
-			      		<h2>Use your time wisely</h2>
-			      		<Link to="/newTask">+</Link>
-						<Route path='/newTask' exact strict render={() => this.showNewTask()}/>
-			        	<h3> Tasks </h3>
-			        	<TaskList 
-	 						tasks={this.state.tasks} 
- 							deleteTask={(id) => this.deleteTask(id)}
-	 						editTask={(id,title,description) => this.editTask(id,title,description)}
-	 					/>
-		      		</div>
+						<Route  exact path='/newTask' render={() => this.showNewTask()}/>
+			    		<Route  path='/'  render={() => this.showTaskList()}/>
+		     		</div>
 		      	</Router>
 	    );
     }

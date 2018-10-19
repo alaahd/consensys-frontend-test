@@ -1,6 +1,6 @@
 import React , { Component } from 'react';
 import $ from 'jquery';
-import {BrowserRouter as Router, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 
@@ -22,7 +22,6 @@ class NewTask extends Component {
 			success:  (msg) => {
 				this.props.getTasks();
 				console.log("success",msg);
-				window.location.reload();
 			},
 			error:  (data) => {
 			    console.error('Failed to get tasks', data);
@@ -32,21 +31,21 @@ class NewTask extends Component {
 
 	render() {
     	return (
-    			<Router>
-		      		<div>
+		      		<div className="NewTask">
 				      	<input 
 				      		type="text" 
 				      		value={this.state.title} 
 				      		onChange={ (e) => {this.setState({title:e.target.value})} } 
+				      		placeholder="Task title"
 				     	/>
 				      	<input 
 				      		type="text" 
 				      		value={this.state.description} 
 				      		onChange={ (e)=> {this.setState({description:e.target.value})} } 
+				      		placeholder="Task description"
 				      	/>
-				      	<Link to="/" onClick={ () => {this.addTask(this.state.title,this.state.description)}}>add</Link>
+				      	<Link to="/"  onClick={ () => {this.addTask(this.state.title,this.state.description)}}><button className="addBtn" >add</button></Link>
 		      		</div>
-		      	</Router>
 	    );
     }
 }

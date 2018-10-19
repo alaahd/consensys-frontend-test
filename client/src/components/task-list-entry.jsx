@@ -12,26 +12,12 @@ class TaskListEntry extends Component {
 	    };
  	}
 
-	// getTask(id){
-	// 	$.ajax({
-	// 		method: 'GET',
-	// 		url: `/task/${id}`,
-	// 		success: (task) => {
-	// 			this.setState({id:task.id,title:task.title,description:task.description})
-	// 		},
-	// 		error: (data) => {
-	// 		    console.error('Failed to get updated task', data);
-	// 		}
- //  		})
-	// }
-
-
 	render() {
 	 			if(!this.state.editFlag){
 					return (
 					    <div>
-					    	<button onClick={() => this.props.deleteTask(this.props.id)}>deleteTask</button>
-					    	<button onClick={() => this.setState({editFlag:!this.state.editFlag})}>editTask</button>
+					    	<button className="close" onClick={() => this.props.deleteTask(this.props.id)}></button>
+					    	<button className="edit" onClick={() => this.setState({editFlag:!this.state.editFlag})}></button>
 					        <div> {this.props.title}</div>
 					        <div >{this.props.description}</div>
 					    </div>
@@ -45,11 +31,13 @@ class TaskListEntry extends Component {
 					      			type="text" 
 					      			value={this.state.title} 
 					      			onChange={ (e) => {this.setState({title:e.target.value}) } }
+					      			placeholder="Edit task title"
 					      		/>
 					      		<input 
 					      			type="text" 
 					      			value={this.state.description} 
 					      			onChange={ (e)=> {this.setState({description:e.target.value}) } }
+					      			placeholder="Edit task description"
 					      		/>
 					      		<input type="submit" value="Submit" />
 					      	</form>
