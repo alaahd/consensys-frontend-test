@@ -1,3 +1,8 @@
+@responsiveFontSize: 3vw;
+@responsiveWidth: 100%;
+
+
+
 * {
   box-sizing:border-box;
 }
@@ -7,7 +12,7 @@ body{
     background-image: url("https://tr1.cbsistatic.com/hub/i/2015/05/07/d29f6f9b-f4ad-11e4-940f-14feb5cc3d2a/03052013figure-c.gif");
     text-align: center;
     opacity:0.7;
-    font-size:3vw;
+    font-size:@responsiveFontSize;
     font-family:Garamond;
     
 } 
@@ -28,11 +33,11 @@ body{
     cursor: pointer;
     padding: 12px 8px 12px 8px;
     background: Lavender;
-    font-size: 3vw;
+    font-size: @responsiveFontSize;
     margin-bottom: 5px;
     font-weight: bold;
     transition: 0.2s;
-    border-radius: 5px;
+    .border-radius(5px);
     border-style: solid;
     border-color: #605F61;
     border-width: 1px;
@@ -42,15 +47,15 @@ body{
 
 
 input,textarea {
-    width: 100%;
+    width: @responsiveWidth;
     padding: 12px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    .border-radius(4px);
     margin-top: 6px;
     margin-bottom: 16px;
     resize: vertical;
     float: left;
-    font-size: 3vw;
+    font-size: @responsiveFontSize;
 }
 
 .addBtn {
@@ -64,7 +69,11 @@ input,textarea {
     font-size: 2vw;
     cursor: pointer;
     transition: 0.3s;
-    border-radius: 5px;
+    .border-radius(5px);
+}
+
+.border-radius(@radius){
+    border-radius: @radius;
 }
 
 .addBtn:hover {
@@ -74,16 +83,7 @@ input,textarea {
 button.close{
     float:right;
     margin-right:0;
-    cursor:pointer;
-    color: #fff;
-    border: 1px solid #AEAEAE;
-    border-radius: 30px;
-    background-color: Maroon;
-    font-size: 31px;
-    font-weight: bold;
-    display: inline-block;
-    line-height: 0px;
-    padding: 11px 3px;       
+    .entry-buttons      
 }
 
 .close:before {
@@ -91,30 +91,26 @@ button.close{
 
 }
 
-button.edit{
+button.edit {
     float:right;
     margin-right:1px;
-    cursor:pointer;
-    color: #fff;
-    border: 1px solid #AEAEAE;
-    border-radius: 30px;
-    background-color: Maroon;
-    font-size: 31px;
-    font-weight: bold;
-    display: inline-block;
-    line-height: 0px;
-    padding: 11px 3px;       
+
+    .entry-buttons    
 }
 
 .edit:before {
     content: "✏";
 }
 
-button.add{
+button.add {
+    .entry-buttons
+}
+
+.entry-buttons {
     cursor:pointer;
     color: #fff;
     border: 1px solid #AEAEAE;
-    border-radius: 30px;
+    .border-radius(30px);
     background-color: Maroon;
     font-size: 31px;
     font-weight: bold;
@@ -129,7 +125,7 @@ button.add{
 }
 
 .header{
-    width:100%;
+    width:@responsiveWidth;
     margin:auto;
     padding: 10px;
 }
@@ -139,10 +135,10 @@ button.add{
 
 @media only screen and (max-width: 600px) {
     .container {
-        width:100%;
+        width:@responsiveWidth;
     }
 
     .button.add button.edit .button.close{
-        font-size:3vw;
+        font-size:@responsiveFontSize;
     }
 }

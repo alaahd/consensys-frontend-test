@@ -107,6 +107,18 @@ button.add {
   line-height: 0px;
   padding: 11px 3px;
 }
+.entry-buttons {
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #AEAEAE;
+  border-radius: 30px;
+  background-color: Maroon;
+  font-size: 31px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 0px;
+  padding: 11px 3px;
+}
 .add:before {
   content: "+";
 }
