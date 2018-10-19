@@ -5,14 +5,14 @@ import {Link} from 'react-router-dom';
 const TaskList = ({tasks, deleteTask, editTask}) => {
 	return (
 		<div>
-			<Link to="/newTask">+</Link>
+			<Link to="/newTask"><button className="add"></button></Link>
 			<ul>
 				{ tasks.map( (task) => {
 											return(
 													<li>
 														<TaskListEntry 
 														    key={task.id}
-															id={task.id} 
+															id={task._id} 
 															title={task.title} 
 															description={task.description}
 															deleteTask={deleteTask}

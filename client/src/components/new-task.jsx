@@ -31,7 +31,7 @@ class NewTask extends Component {
 
 	render() {
     	return (
-		      		<div className="NewTask">
+		      		<div className="tesxt">
 				      	<input 
 				      		type="text" 
 				      		value={this.state.title} 

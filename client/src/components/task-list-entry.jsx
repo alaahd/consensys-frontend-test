@@ -25,7 +25,7 @@ class TaskListEntry extends Component {
 				}
 				else{
 					return (
-					    <div>
+					    <div className="text">
 			      			<form onSubmit={ () => {this.props.editTask(this.props.id,this.state.title,this.state.description)}}>
 					      		<input 
 					      			type="text" 

@@ -24,7 +24,7 @@ class App extends Component {
 			method: 'GET',
 			url: '/tasks',
 			success: (tasks) => {
-				this.setState({tasks:tasks.tasks})
+				this.setState({tasks:tasks})
 			},
 			error: (data) => {
 			    console.error('Failed to get tasks', data);

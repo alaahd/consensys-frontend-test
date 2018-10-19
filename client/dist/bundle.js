@@ -109,7 +109,7 @@
 					method: 'GET',
 					url: '/tasks',
 					success: function success(tasks) {
-						_this2.setState({ tasks: tasks.tasks });
+						_this2.setState({ tasks: tasks });
 					},
 					error: function error(data) {
 						console.error('Failed to get tasks', data);
@@ -33071,7 +33071,7 @@
 			_react2.default.createElement(
 				_reactRouterDom.Link,
 				{ to: '/newTask' },
-				'+'
+				_react2.default.createElement('button', { className: 'add' })
 			),
 			_react2.default.createElement(
 				'ul',
@@ -33082,7 +33082,7 @@
 						null,
 						_react2.default.createElement(_taskListEntry2.default, {
 							key: task.id,
-							id: task.id,
+							id: task._id,
 							title: task.title,
 							description: task.description,
 							deleteTask: deleteTask,
@@ -33173,7 +33173,7 @@
 				} else {
 					return _react2.default.createElement(
 						'div',
-						null,
+						{ className: 'text' },
 						_react2.default.createElement(
 							'form',
 							{ onSubmit: function onSubmit() {
@@ -33279,7 +33279,7 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ className: 'NewTask' },
+					{ className: 'tesxt' },
 					_react2.default.createElement('input', {
 						type: 'text',
 						value: this.state.title,
