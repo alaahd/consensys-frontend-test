@@ -60,6 +60,8 @@ class App extends Component {
   		})
 	}
 
+    //Wrapper functions to render components with props depending on the route 
+
 	showNewTask(){
 		return <NewTask  getTasks={()=> this.getTasks()}/>
 	}
@@ -86,5 +88,7 @@ class App extends Component {
 	    );
     }
 }
+
+export default App;
 
 ReactDOM.render(<App />,document.getElementById('app'));

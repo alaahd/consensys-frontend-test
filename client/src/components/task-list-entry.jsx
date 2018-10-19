@@ -6,7 +6,7 @@ class TaskListEntry extends Component {
 	    super(props);
      
 	    this.state = {
-	      editFlag:false,
+	      editFlag:false, 
 	      title:"",
 	      description:""
 	    };

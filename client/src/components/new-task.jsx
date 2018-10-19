@@ -38,7 +38,6 @@ class NewTask extends Component {
 				      		onChange={ (e) => {this.setState({title:e.target.value})} } 
 				      		placeholder="Task title"
 				     	/>
-
 				      	<textarea 
 				      		style={{"height":"200px"}}
 				      		type="text" 
