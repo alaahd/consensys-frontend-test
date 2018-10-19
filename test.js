@@ -1,18 +1,29 @@
 import React from 'react';
 import { shallow, mount , render } from 'enzyme';
-import NewTask from '../client/src/components/new-task.jsx';
-import TaskListEntry from '../client/src/components/task-list-entry.jsx';
-import TaskList from '../client/src/components/task-list.jsx';
-import App from '../client/src/index.jsx'
+import NewTask from './client/src/components/new-task.jsx';
+import TaskListEntry from './client/src/components/task-list-entry.jsx';
+import TaskList from './client/src/components/task-list.jsx';
 
+// a trial to write tests but need to be fixed 
 
-
-describe('Render components', () => {
- test('should render App component correctly', () => {
+describe('TaskListEntry tests', () => {
+ test('should render TaskListEntry component correctly', () => {
      expect(render(
-       <App />
+       <TaskListEntry />
      )).toMatchSnapshot()
  })
+
+ 
+  test('should set the edit flag when an edit button is clicked', () => {
+    const wrapper = render(<TaskListEntry />);
+    const editbtn = wrapper.find("button.edit");
+    editbtn.simulate('click');
+    expect(wrapper.state().editFlag).toEqual(true)
+   })
+
+})
+
+describe('Render components', () => {
  test('should shallow NewTask component correctly', () => {
      expect(shallow(
        <NewTask />
@@ -20,15 +31,11 @@ describe('Render components', () => {
  })
  test('should mount TaskList component correctly', () => {
      expect(mount(
-       <TaskList />
-     )).toMatchSnapshot()
- })
- test('should render TaskListEntry component correctly', () => {
-     expect(render(
-       <TaskListEntry />
+       <TaskList tasks={[]}/>
      )).toMatchSnapshot()
  })
 })
+
 
 describe("tests props and state",() => {
   test('render a document title', () => {
