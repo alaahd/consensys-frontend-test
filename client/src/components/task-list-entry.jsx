@@ -7,25 +7,25 @@ class TaskListEntry extends Component {
      
 	    this.state = {
 	      editFlag:false,
-	      titlee:"",
-	      descriptionn:""
+	      title:"",
+	      description:""
 	    };
  	}
 
 	render() {
 	 			if(!this.state.editFlag){
 					return (
-					    <div>
+					    <div className= "entry">
 					    	<button className="close" onClick={() => this.props.deleteTask(this.props.id)}></button>
 					    	<button className="edit" onClick={() => this.setState({editFlag:!this.state.editFlag})}></button>
-					        <div> {this.props.title}</div>
-					        <div >{this.props.description}</div>
+					        <div>Task Title:  {this.props.title}</div>
+					        <div >Task Description: {this.props.description}</div>
 					    </div>
 					);
 				}
 				else{
 					return (
-					    <div className="text">
+					    <div className="entry">
 			      			<form onSubmit={ () => {this.props.editTask(this.props.id,this.state.title,this.state.description)}}>
 					      		<input 
 					      			type="text" 
@@ -39,7 +39,7 @@ class TaskListEntry extends Component {
 					      			onChange={ (e)=> {this.setState({description:e.target.value}) } }
 					      			placeholder="Edit task description"
 					      		/>
-					      		<input type="submit" value="Submit" />
+					      		<input type="submit" value="Edit" />
 					      	</form>
 	      				</div>
 					);

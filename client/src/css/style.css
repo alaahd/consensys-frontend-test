@@ -2,21 +2,28 @@
   box-sizing: border-box;
 }
 body {
-  background: #e6e6fa;
+  background: LemonChiffon;
+  background-image: url("https://tr1.cbsistatic.com/hub/i/2015/05/07/d29f6f9b-f4ad-11e4-940f-14feb5cc3d2a/03052013figure-c.gif");
   text-align: center;
+  opacity: 0.7;
   font-size: 3vw;
+  font-family: Garamond;
 }
-ul {
-  margin: 50px;
+.container {
+  margin: auto;
   padding: 0;
-  list-style-type: none;
+  width: 50%;
 }
-ul li {
+.listentry {
+  margin: auto;
+  padding: 0;
+}
+.entry {
   cursor: pointer;
-  position: relative;
   padding: 12px 8px 12px 8px;
-  background: #eee;
-  font-size: 2vw;
+  background: Lavender;
+  font-size: 3vw;
+  margin-bottom: 5px;
   font-weight: bold;
   transition: 0.2s;
   border-radius: 5px;
@@ -24,14 +31,19 @@ ul li {
   border-color: #605F61;
   border-width: 1px;
   position: static;
+  text-align: left;
 }
-input {
-  margin: 0;
-  border-radius: 5px;
-  width: 25%;
-  padding: 10px;
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
   float: left;
-  font-size: 2vw;
+  font-size: 3vw;
 }
 .addBtn {
   margin: 0;
@@ -56,7 +68,7 @@ button.close {
   color: #fff;
   border: 1px solid #AEAEAE;
   border-radius: 30px;
-  background: #605F61;
+  background-color: Maroon;
   font-size: 31px;
   font-weight: bold;
   display: inline-block;
@@ -73,7 +85,7 @@ button.edit {
   color: #fff;
   border: 1px solid #AEAEAE;
   border-radius: 30px;
-  background: #605F61;
+  background-color: Maroon;
   font-size: 31px;
   font-weight: bold;
   display: inline-block;
@@ -88,7 +100,7 @@ button.add {
   color: #fff;
   border: 1px solid #AEAEAE;
   border-radius: 30px;
-  background: #605F61;
+  background-color: Maroon;
   font-size: 31px;
   font-weight: bold;
   display: inline-block;
@@ -98,7 +110,19 @@ button.add {
 .add:before {
   content: "+";
 }
-.text {
-  width: 400px;
+.header {
+  width: 100%;
   margin: auto;
+  padding: 10px;
+}
+.firstLine {
+  margin-bottom: 0;
+}
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+  }
+  .button.add button.edit .button.close {
+    font-size: 3vw;
+  }
 }

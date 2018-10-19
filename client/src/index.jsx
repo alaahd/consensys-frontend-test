@@ -79,8 +79,8 @@ class App extends Component {
     	return (
     			<Router>
 		      		<div>
-						<Route  exact path='/newTask' render={() => this.showNewTask()}/>
-			    		<Route  path='/'  render={() => this.showTaskList()}/>
+						<Route exact path='/newTask' render={() => this.showNewTask()}/>
+			    		<Route exact path='/'  render={() => this.showTaskList()}/>
 		     		</div>
 		      	</Router>
 	    );

@@ -6,10 +6,10 @@ const TaskList = ({tasks, deleteTask, editTask}) => {
 	return (
 		<div>
 			<Link to="/newTask"><button className="add"></button></Link>
-			<ul>
+			<div className="listentry">
 				{ tasks.map( (task) => {
 											return(
-													<li>
+													
 														<TaskListEntry 
 														    key={task.id}
 															id={task._id} 
@@ -18,12 +18,12 @@ const TaskList = ({tasks, deleteTask, editTask}) => {
 															deleteTask={deleteTask}
 															editTask={editTask}
 														/> 
-													</li>
+													
 											)
 										}
 							)
 				}
-			</ul>
+			</div>
 		</div>
     );
 }

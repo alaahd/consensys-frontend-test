@@ -31,14 +31,16 @@ class NewTask extends Component {
 
 	render() {
     	return (
-		      		<div className="tesxt">
+		      		<div className="text">
 				      	<input 
 				      		type="text" 
 				      		value={this.state.title} 
 				      		onChange={ (e) => {this.setState({title:e.target.value})} } 
 				      		placeholder="Task title"
 				     	/>
-				      	<input 
+
+				      	<textarea 
+				      		style={{"height":"200px"}}
 				      		type="text" 
 				      		value={this.state.description} 
 				      		onChange={ (e)=> {this.setState({description:e.target.value})} } 

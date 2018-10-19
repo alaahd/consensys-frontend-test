@@ -188,7 +188,7 @@
 						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/newTask', render: function render() {
 								return _this7.showNewTask();
 							} }),
-						_react2.default.createElement(_reactRouterDom.Route, { path: '/', render: function render() {
+						_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
 								return _this7.showTaskList();
 							} })
 					)
@@ -33074,21 +33074,17 @@
 				_react2.default.createElement('button', { className: 'add' })
 			),
 			_react2.default.createElement(
-				'ul',
-				null,
+				'div',
+				{ className: 'listentry' },
 				tasks.map(function (task) {
-					return _react2.default.createElement(
-						'li',
-						null,
-						_react2.default.createElement(_taskListEntry2.default, {
-							key: task.id,
-							id: task._id,
-							title: task.title,
-							description: task.description,
-							deleteTask: deleteTask,
-							editTask: editTask
-						})
-					);
+					return _react2.default.createElement(_taskListEntry2.default, {
+						key: task.id,
+						id: task._id,
+						title: task.title,
+						description: task.description,
+						deleteTask: deleteTask,
+						editTask: editTask
+					});
 				})
 			)
 		);
@@ -33137,8 +33133,8 @@
 	
 			_this.state = {
 				editFlag: false,
-				titlee: "",
-				descriptionn: ""
+				title: "",
+				description: ""
 			};
 			return _this;
 		}
@@ -33151,7 +33147,7 @@
 				if (!this.state.editFlag) {
 					return _react2.default.createElement(
 						'div',
-						null,
+						{ className: 'entry' },
 						_react2.default.createElement('button', { className: 'close', onClick: function onClick() {
 								return _this2.props.deleteTask(_this2.props.id);
 							} }),
@@ -33161,19 +33157,20 @@
 						_react2.default.createElement(
 							'div',
 							null,
-							' ',
+							'Task Title:  ',
 							this.props.title
 						),
 						_react2.default.createElement(
 							'div',
 							null,
+							'Task Description: ',
 							this.props.description
 						)
 					);
 				} else {
 					return _react2.default.createElement(
 						'div',
-						{ className: 'text' },
+						{ className: 'entry' },
 						_react2.default.createElement(
 							'form',
 							{ onSubmit: function onSubmit() {
@@ -33195,7 +33192,7 @@
 								},
 								placeholder: 'Edit task description'
 							}),
-							_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
+							_react2.default.createElement('input', { type: 'submit', value: 'Edit' })
 						)
 					);
 				}
@@ -33279,7 +33276,7 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ className: 'tesxt' },
+					{ className: 'text' },
 					_react2.default.createElement('input', {
 						type: 'text',
 						value: this.state.title,
@@ -33288,7 +33285,8 @@
 						},
 						placeholder: 'Task title'
 					}),
-					_react2.default.createElement('input', {
+					_react2.default.createElement('textarea', {
+						style: { "height": "200px" },
 						type: 'text',
 						value: this.state.description,
 						onChange: function onChange(e) {
